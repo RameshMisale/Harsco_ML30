@@ -12,7 +12,7 @@ from sklearn.pipeline import Pipeline
 # Define function to perform prediction 
 def perform_prediction(df):
     # Load the trained model using joblib
-    model_case = joblib.load(open(r'C:\Users\RameshMisale\Desktop\Top30_columns\random_forest1.pkl', 'rb'))
+    model_case = joblib.load(open('random_forest1.pkl', 'rb'))
     
     # Define preprocessing steps
     numerical_features = df.select_dtypes(include=['float64', 'int64']).columns
