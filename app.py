@@ -3,15 +3,16 @@ import streamlit as st
 import pandas as pd
 import base64
 import joblib
-from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer 
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 
 # Define function to perform prediction 
 def perform_prediction(df):
     # Load the trained model using joblib
-    model_case = joblib.load(open('random_forest2.pkl','rb'))
+    model_case = joblib.load(open('decisiontree.pkl', 'rb'))
     
     # Define preprocessing steps
     numerical_features = df.select_dtypes(include=['float64', 'int64']).columns
@@ -37,20 +38,19 @@ def perform_prediction(df):
     preprocessor.fit(df)  # Assuming df is your training data
 
     # Make predictions on the preprocessed dataframe
-    X_preprocessed = preprocessor.transform(df)
-    y_pred_case = model_case.predict(X_preprocessed)
-    y_pred_case = pd.DataFrame(y_pred_case, columns=['Resubmit'])
+    y_pred_case = model_case.predict(preprocessor.transform(df))
+    y_pred_case = pd.DataFrame(y_pred_case, columns=['predicted_values'])
     
-    result_df = pd.concat([df.reset_index(drop=True), pd.DataFrame(y_pred_case, columns=['Resubmit'])], axis=1)
+    result_df = pd.concat([df.reset_index(drop=True), pd.DataFrame(y_pred_case, columns=['predicted_values'])], axis=1)
     
     return result_df
 
 
 # Set app title and page icon
-st.set_page_config(page_title='Prediction of Resubmit/Returned pfofiles', page_icon=':open_file_folder:')
+st.set_page_config(page_title='CSV File Uploader', page_icon=':open_file_folder:')
 
 # Set app header
-st.header('Prediction of Resubmit/Returned pfofiles')
+st.header('Prediction of Resubmit\Returned profiles')
 
 # Create file uploader component
 csv_file = st.file_uploader('Choose a CSV file', type='csv')
