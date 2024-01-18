@@ -1,96 +1,48 @@
-from sklearn.pipeline import Pipeline
 import streamlit as st
 import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, precision_recall_fscore_support, accuracy_score
+from sklearn.preprocessing import LabelEncoder
 import base64
 import joblib
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 
-# Define function to perform prediction 
-def perform_prediction(df):
-    # Load the trained model using joblib
-    model_case = joblib.load(open('decision_tree.pkl', 'rb'))
+def perform_prediction(df, true_labels, model):
+    features = df.drop('Resubmit_binary', axis=1)
+    le = LabelEncoder()
+    for col in features.select_dtypes(include='object').columns:
+        features[col] = le.fit_transform(features[col])
+    y_pred = model.predict(features)
+    report = classification_report(true_labels, y_pred)
+    confusion = confusion_matrix(true_labels, y_pred)
     
-    # Define preprocessing steps
-    numerical_features = df.select_dtypes(include=['float64', 'int64']).columns
-    categorical_features = df.select_dtypes(include=['object']).columns
-
-    numeric_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='mean')),
-        ('scaler', StandardScaler())
-    ])
-
-    categorical_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='most_frequent')),
-        ('onehot', OneHotEncoder(handle_unknown='ignore'))
-    ])
-
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', numeric_transformer, numerical_features),
-            ('cat', categorical_transformer, categorical_features)
-        ])
+    precision, recall, f1_score, _ = precision_recall_fscore_support(true_labels, y_pred, average='binary')
+    accuracy = accuracy_score(true_labels, y_pred)
+    specificity = confusion[0, 0] / (confusion[0, 0] + confusion[0, 1])
     
-    # Fit the transformer on your training data before using it to transform new data
-    preprocessor.fit(df)  # Assuming df is your training data
-
-    # Make predictions on the preprocessed dataframe
-    y_pred_case = model_case.predict(preprocessor.transform(df))
-    y_pred_case = pd.DataFrame(y_pred_case, columns=['predicted_values'])
-    
-    result_df = pd.concat([df.reset_index(drop=True), pd.DataFrame(y_pred_case, columns=['predicted_values'])], axis=1)
-    
-    return result_df
+    return precision, recall, f1_score, accuracy, specificity, confusion
 
 
-# Set app title and page icon
 st.set_page_config(page_title='CSV File Uploader', page_icon=':open_file_folder:')
-
-# Set app header
-st.header('Prediction of Resubmit\Returned profiles')
-
-# Create file uploader component
+st.header('Prediction Metrics for Resubmit/Returned Profiles')
 csv_file = st.file_uploader('Choose a CSV file', type='csv')
 
-# Check if a file was uploaded
+
 if csv_file is not None:
     df = pd.read_csv(csv_file)
     st.write(df)
-    
-    # Apply HTML and CSS for the background image
-    st.markdown(
-        """
-        <style>
-            body {
-                background: url('Logo.png') no-repeat center center fixed;
-                background-size: cover;
-            }
-            .reportview-container {
-                background: none;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    if st.button('Perform Prediction'):
-        result_df = perform_prediction(df)
-        st.write(result_df)
-        
-        # Create a button to download the predicted dataframe as a CSV file
-        if 'download_button' not in st.session_state:
-            st.session_state.download_button = False
-        
-        if st.button('Download Predicted CSV File'):
-            st.session_state.download_button = True
-        
-        if st.session_state.download_button:
-            csv = result_df.to_csv(index=False)
-            b64 = base64.b64encode(csv.encode()).decode()
-            href = f'<a href="data:file/csv;base64,{b64}" download="predicted_data.csv">Download Predicted CSV File</a>'
-            st.markdown(href, unsafe_allow_html=True)
+    if 'Resubmit_binary' not in df.columns:
+        st.error("Please make sure your CSV file has a column named 'Resubmit_binary' for the target variable.")
+    else:
+        model = joblib.load(open('decision_tree.pkl', 'rb'))
+        true_labels = df['Resubmit_binary']
+        precision, recall, f1_score, accuracy, specificity, confusion = perform_prediction(df, true_labels, model)
+        st.write(f"Precision: {precision:.2%}")
+        st.write(f"Recall: {recall:.2%}")
+        st.write(f"F1 Score: {f1_score:.2%}")
+        st.write(f"Accuracy: {accuracy:.2%}")
+        st.write(f"Specificity: {specificity:.2%}")
+        st.write("Confusion Matrix:")
+        st.text(confusion)
 else:
     st.warning('Please upload a CSV file')
