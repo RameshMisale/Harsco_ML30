@@ -37,7 +37,7 @@ if csv_file is not None:
     if 'Resubmit_binary' not in df.columns:
         st.error("Please make sure your CSV file has a column named 'Resubmit_binary' for the target variable.")
     else:
-        model = joblib.load(open('decision_tree (1).pkl', 'rb'))
+        model = joblib.load(open('decision_tree.joblib', 'rb'))
         true_labels = df['Resubmit_binary']
         precision, recall, f1_score, accuracy, specificity, confusion, result_df, classification_report_text = perform_prediction(df, true_labels, model)
 
