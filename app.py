@@ -40,19 +40,23 @@ if csv_file is not None:
         model = joblib.load(open('decision_tree.pkl', 'rb'))
         true_labels = df['Resubmit_binary']
         precision, recall, f1_score, accuracy, specificity, confusion, result_df, classification_report_text = perform_prediction(df, true_labels, model)
-        st.write(f"Precision: {precision:.2%}")
-        st.write(f"Recall: {recall:.2%}")
-        st.write(f"F1 Score: {f1_score:.2%}")
-        st.write(f"Accuracy: {accuracy:.2%}")
-        st.write(f"Specificity: {specificity:.2%}")
+
+        # Display Result DataFrame on top
+        st.write("Note: 1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
+        st.write("Result DataFrame:")
+        st.write(result_df)
+
+        # Display Metrics Below Result DataFrame
+        st.write("Precision: {:.2%}".format(precision))
+        st.write("Recall: {:.2%}".format(recall))
+        st.write("F1 Score: {:.2%}".format(f1_score))
+        st.write("Accuracy: {:.2%}".format(accuracy))
+        st.write("Specificity: {:.2%}".format(specificity))
         
         st.write("Confusion Matrix:")
         st.text(confusion)
-        st.write("Note: 1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
+        # st.write("Note: 1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
         
-        st.write("Prediction DataFrame:")
-        st.write(result_df)
-
         st.write("Classification Report:")
         st.text(classification_report_text)
 else:
