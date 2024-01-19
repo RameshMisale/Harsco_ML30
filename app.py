@@ -21,7 +21,7 @@ def perform_prediction(df, true_labels, model):
     
     result_df = pd.DataFrame({
         'profile_id': df['profile_id'],
-        'Actual': true_labels,
+        'Actual': true_labels, 
         'Predicted': y_pred
     })
     
