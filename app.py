@@ -28,7 +28,7 @@ def perform_prediction(df, true_labels, model):
     return precision, recall, f1_score, accuracy, specificity, confusion, result_df, report
 
 st.set_page_config(page_title='CSV File Uploader', page_icon=':open_file_folder:')
-st.header('Prediction Metrics for Resubmit/Returned Profiles')
+st.header('Predicting the Potential Profiles that might go into  Resubmit/Returned stage')
 csv_file = st.file_uploader('Choose a CSV file', type='csv')
 
 if csv_file is not None:
@@ -37,24 +37,38 @@ if csv_file is not None:
     if 'Resubmit_binary' not in df.columns:
         st.error("Please make sure your CSV file has a column named 'Resubmit_binary' for the target variable.")
     else:
-        model = joblib.load(open('decision_tree.joblib', 'rb'))
+        model = joblib.load(open('decision_tree (1).pkl', 'rb'))
         true_labels = df['Resubmit_binary']
         precision, recall, f1_score, accuracy, specificity, confusion, result_df, classification_report_text = perform_prediction(df, true_labels, model)
 
         # Display Result DataFrame on top
-        st.write("Note: 1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
+        st.write("  ")
+        st.write("  ")
+        st.write("1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
+        st.write("  ")
+        st.write("  ")
         st.write("Result DataFrame:")
+        st.write("  ")
         st.write(result_df)
+        st.write("  ")
+        st.write("  ")
 
         # Display Metrics Below Result DataFrame
+        st.write("Confusion Matrix:")
+        st.text(confusion)
+        st.write("  ")
+        st.write("  ")
         st.write("Precision: {:.2%}".format(precision))
         st.write("Recall: {:.2%}".format(recall))
         st.write("F1 Score: {:.2%}".format(f1_score))
         st.write("Accuracy: {:.2%}".format(accuracy))
         st.write("Specificity: {:.2%}".format(specificity))
+        st.write("  ")
+        st.write("  ")
+        st.write("  ")
         
-        st.write("Confusion Matrix:")
-        st.text(confusion)
+        # st.write("Confusion Matrix:")
+        # st.text(confusion)
         # st.write("Note: 1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
         
         st.write("Classification Report:")
