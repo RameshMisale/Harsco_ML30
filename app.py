@@ -21,7 +21,7 @@ def perform_prediction(df, true_labels, model):
     
     result_df = pd.DataFrame({
         'profile_id': df['profile_id'],
-        'Actual': true_labels, 
+        'Actual': true_labels,
         'Predicted': y_pred
     })
     
@@ -33,7 +33,14 @@ csv_file = st.file_uploader('Choose a CSV file', type='csv')
 
 if csv_file is not None:
     df = pd.read_csv(csv_file)
-    st.write(df)
+    
+    # Exclude the target variable column from the displayed DataFrame
+    if 'Resubmit_binary' in df.columns:
+        df_display = df.drop('Resubmit_binary', axis=1)
+        st.write(df_display)
+    else:
+        st.write(df)
+
     if 'Resubmit_binary' not in df.columns:
         st.error("Please make sure your CSV file has a column named 'Resubmit_binary' for the target variable.")
     else:
@@ -46,7 +53,7 @@ if csv_file is not None:
         st.write("  ")
         st.write("1 corresponds to 'Resubmit', and 0 corresponds to 'Not Resubmit'")
         st.write("  ")
-        st.write("  ")
+        st.write("Output Results")
         st.write("Result DataFrame:")
         st.write("  ")
         st.write(result_df)
