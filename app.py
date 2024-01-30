@@ -20,8 +20,9 @@ def perform_prediction(df, true_labels, model):
         'profile_id': df['profile_id'],
         'Actual': true_labels,
         'Predicted': predicted_labels,
-        'Probability_Class_0': probability_values[:, 0],
-        'Probability_Class_1': probability_values[:, 1]
+        'Probability_Resubmit': probability_values[:, 1],
+        'Probability_Not_Resubmit': probability_values[:, 0]
+        
     })
     
     return result_df
