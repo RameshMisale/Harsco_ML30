@@ -90,7 +90,7 @@ if profile_id.strip():  # Check if profile ID is entered and strip whitespace
             features_df = pd.DataFrame(data)
             model = joblib.load(open('decision_tree_n.pkl', 'rb'))
             result_df = perform_prediction(features_df, model)
-           
+            
             predicted_class = result_df['Predicted'].iloc[0]
             confidence_class_0 = result_df['Probability_Class_0'].iloc[0]
             confidence_class_1 = result_df['Probability_Class_1'].iloc[0]
