@@ -31,10 +31,10 @@ st.markdown(
     """
     <style>
         body {
-            background-color: #78BE20​ !important;  /* Light green color */
+            background-color: #78BE20 !important;  /* Light green color */
         }
         .stTextInput>div>div>input {
-            background-color: #BBBCBC !important; /* Custom green color for input boxes */
+            background-color: #BBBCBC​ !important; /* Custom green color for input boxes */
             color: black !important; /* Text color */
         }
     </style>
@@ -43,7 +43,7 @@ st.markdown(
 )
 st.markdown(
             """
-            <div style="background-color: #78BE20​​; padding: 10px; border-radius: 10px; text-align: center;">
+            <div style="background-color: #78BE20; padding: 10px; border-radius: 10px; text-align: center;">
                 <h1 style="color: white;">PROFILE RESUBMIT PREDICTION (UC4)</h1>
             </div>
             """,
@@ -58,7 +58,7 @@ st.markdown("")
 st.markdown("") 
 
 if profile_id.strip():  # Check if profile ID is entered and strip whitespace
-    df = pd.read_csv("Test.csv")  # Load your local CSV file
+    df = pd.read_csv(r"Test.csv")  # Load your local CSV file
  
     if profile_id.strip() in df['profile_id'].astype(str).values:  # Check if profile ID exists in the CSV
         st.write(f"Profile ID: {profile_id} found.")
@@ -90,7 +90,7 @@ if profile_id.strip():  # Check if profile ID is entered and strip whitespace
             features_df = pd.DataFrame(data)
             model = joblib.load(open('decision_tree_n.pkl', 'rb'))
             result_df = perform_prediction(features_df, model)
-            
+           
             predicted_class = result_df['Predicted'].iloc[0]
             confidence_class_0 = result_df['Probability_Class_0'].iloc[0]
             confidence_class_1 = result_df['Probability_Class_1'].iloc[0]
