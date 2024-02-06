@@ -34,7 +34,7 @@ st.markdown(
             background-color: #BBBCBC​ !important;  /* Light green color */
         }
         .stTextInput>div>div>input {
-            background-color: #C9FFC2 !important; /* Custom green color for input boxes */
+            background-color: #BBBCBC !important; /* Custom green color for input boxes */
             color: black !important; /* Text color */
         }
     </style>
@@ -43,7 +43,7 @@ st.markdown(
 )
 st.markdown(
             """
-            <div style="background-color: #BBBCBC; padding: 10px; border-radius: 10px; text-align: center;">
+            <div style="background-color: #78BE20​; padding: 10px; border-radius: 10px; text-align: center;">
                 <h1 style="color: white;">PROFILE RESUBMIT PREDICTION (UC4)</h1>
             </div>
             """,
