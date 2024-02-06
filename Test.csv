@@ -1,0 +1,11 @@
+profile_id,flash_point_flag,water_reactivity_flag,monolith_flag,sulfides_reactivity_flag,cyanides_reactivity_flag,intercompany_flag,specialpricing_flag,benzene_waste_flag,sulfides_flag,solid_flag,hybrid_flag,shock_reactivity_flag,nrc_regulated_radioactive_flag,lab_pack_flag,gas_flag,directship_flag,naics_flag,infectious_bio_waste_flag,mgp_flag,aerosol_flag,pyrophoric_reactivity_flag,sludges_flag,pcbs_flag,halogens_flag,cyanides_flag,pesticides_flag,dot_explosive_flag,boiling_point_flag,isRecertified,labpack_flag,national_flag,urgent_flag,rush_flag
+653958,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+653949,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+610027,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+610028,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+610029,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0
+610059,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+653692,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+653677,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0
+653662,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+610074,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
