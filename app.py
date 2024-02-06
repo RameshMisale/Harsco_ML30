@@ -34,10 +34,12 @@ st.markdown(
         body {
             background-color: #78BE20 !important;  /* Light green color */
         }
-        .stTextInput input[type="number"]::-webkit-inner-spin-button,
-        .stTextInput input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .stTextInput>div>div>input {
+            background-color: #78BE20 !important;  /* Light green color */
+            color: white !important;
+        }
+        .stTextInput>div>div>label {
+            color: white !important;
         }
     </style>
     """,
