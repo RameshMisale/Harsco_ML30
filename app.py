@@ -20,7 +20,7 @@ def perform_prediction(features, model):
  
 # Set page configuration and add logo
 st.set_page_config(page_title='Manual Entry Predictor', page_icon=':clipboard:', layout='wide', initial_sidebar_state='expanded')
-logo = Image.open(r'C:\Users\RameshMisale\Desktop\Top30_columns\Streamlit_model\Logo.jpg')  
+logo = Image.open('Logo.jpg')  
 st.image(logo, use_column_width=False, width=200)
  
 # Set background color using CSS
