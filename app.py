@@ -44,7 +44,7 @@ st.markdown(
 st.markdown(
             """
             <div style="background-color: #78BE20; padding: 10px; border-radius: 10px; text-align: center;">
-                <h1 style="color: white;">PROFILE RESUBMIT PREDICTION(UC4)</h1>
+                <h1 style="color: white;">PROFILE RESUBMIT PREDICTION (UC4)</h1>
             </div>
             """,
             unsafe_allow_html=True
