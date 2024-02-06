@@ -31,7 +31,7 @@ st.markdown(
     """
     <style>
         body {
-            background-color: #78BE20 !important;  /* Light green color */
+            background-color: #BBBCBC​ !important;  /* Light green color */
         }
         .stTextInput>div>div>input {
             background-color: #C9FFC2 !important; /* Custom green color for input boxes */
