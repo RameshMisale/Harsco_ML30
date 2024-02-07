@@ -88,7 +88,7 @@ if profile_id.strip():  # Check if profile ID is entered and strip whitespace
         if st.button('Predict'):
             data = {feature: [value] for feature, value in user_inputs.items()}
             features_df = pd.DataFrame(data)
-            model = joblib.load(open('decision_tree_n.pkl', 'rb'))
+            model = joblib.load(open('decision_tree_upadted.pkl', 'rb'))
             result_df = perform_prediction(features_df, model)
            
             predicted_class = result_df['Predicted'].iloc[0]
