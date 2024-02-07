@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from PIL import Image
 
-model = joblib.load(open('decision_tree_n.pkl', 'rb'))
+model = joblib.load(open('decision_tree_upadted.pkl', 'rb'))
 
 def perform_prediction(features, model):
     probability_values = model.predict_proba(features)
