@@ -58,8 +58,9 @@ if profile_id.strip():
         user_inputs = {}
 
         for idx, col in enumerate(df.columns):
-            with cols[idx % 3]:
-                user_inputs[col] = st.text_input(col, value=str(df[col].iloc[0]))  
+            if col != 'profile_id':  # Skip profile_id column
+                with cols[idx % 3]:
+                    user_inputs[col] = st.text_input(col, value=str(df[col].iloc[0]))  
 
         if st.button('Predict'):
             data = {feature: [value] for feature, value in user_inputs.items()}
